@@ -14,6 +14,12 @@ namespace strngr_dngr.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return Ok(new { success = true });
+        }
+        
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts(int startDateIndex)
         {

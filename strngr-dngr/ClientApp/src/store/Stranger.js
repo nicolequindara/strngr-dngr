@@ -1,3 +1,5 @@
+import {StrangerService} from "../services/StrangerService";
+
 const addPhotoType = "ADD_PHOTO";
 const addStrangerInfoType = "ADD_STRANGER_INFO";
 
@@ -14,8 +16,19 @@ const initialState = {
 }
 
 export const actionCreators = {
-  addPhoto: () => ({ type: addPhotoType}),
-  addStranger: () => ({ type: addStrangerInfoType})
+  addPhoto: (photos) => async(dispatch, getState) => {
+    // Call API
+    const ret = await StrangerService.test();
+    // StrangerService.uploadPhotos(photos).then((resp) => {
+    //   console.log(resp);
+    // }).catch((err) => { 
+    //   console.log(err);
+    // });
+
+    
+    return ({ type: addPhotoType, photos });    
+  },
+  addStranger: (info) => ({ type: addStrangerInfoType, info })
 };
 
 export const reducer = (state, action) => {
