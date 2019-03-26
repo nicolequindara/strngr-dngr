@@ -1,4 +1,5 @@
 import * as Stranger from './Stranger';
+import * as WeatherForecasts from './WeatherForecasts';
 
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
@@ -7,7 +8,8 @@ import thunk from 'redux-thunk';
 
 export default function configureStore (history, initialState) {
   const reducers = {
-    stranger: Stranger.reducer
+    stranger: Stranger.reducer,    
+    weatherForecasts: WeatherForecasts.reducer
   };
 
   const middleware = [
