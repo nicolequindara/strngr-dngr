@@ -6,32 +6,33 @@ import { default as photoButton } from "../img/photo_button.png"
 
 const PhotoUpload = props => {
 
-   const uploadPhotos = (e) => {
-    props.addPhoto(e.files);
-  }
+    const handleChange = (files) => {        
+        props.addPhoto(files);
+    }
 
-  return(
-  <div className="App">
-    <div className="App-header">
-      <h1>Upload Photos</h1>    
+    return (
+        <div className="App">
+            <div className="App-header">
+                <h1>Upload Photos</h1>
 
-      <div>
-        <label htmlFor="photoUploadButton">
-        <img src={photoButton} className="App-logo" alt="logo" />
-      </label>
-      
-      <input type="file" 
-        style={{display: "none"}}
-        id="photoUploadButton"
-        className="btn btn-primary"
-        onChange={e => {uploadPhotos(e.target.files)}} />  
-      </div>
-    </div>
-  </div>
-);
+                <div style={{ cursor: "pointer" }}>
+                    <label htmlFor="photoUploadButton">
+                        <img src={photoButton} className="App-logo" alt="logo" />
+                    </label>
+
+                    <input type="file" 
+                        multiple
+                        style={{ display: "none" }}
+                        id="photoUploadButton"
+                        className="btn btn-primary"
+                        onChange={(e) => handleChange(e.target.files)} />
+                </div>
+            </div>
+        </div>
+    );
 
 }
 export default connect(
-  state => state.stranger,
-  dispatch => bindActionCreators(actionCreators, dispatch)
+    state => state.stranger,
+    dispatch => bindActionCreators(actionCreators, dispatch)
 )(PhotoUpload);

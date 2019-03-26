@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.IO;
+using Microsoft.AspNetCore.Mvc;
 using strngr_dngr.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.CognitiveServices.Search.VisualSearch.Models;
 
 namespace strngr_dngr.Controllers
 {
+    [Route("api/[controller]")]
     public class PhotoProcessingController : Controller
     {
         private readonly IPhotoProcessingClient _photoClient;
@@ -11,19 +16,25 @@ namespace strngr_dngr.Controllers
             _photoClient = client;
         }
 
-		[HttpPost, Route("api/photo/test")]
-        public IActionResult Test()
+        [HttpPost("[action]")]
+        public IActionResult GetProcessedPhotoData()
         {
-            return Ok(new JsonResult(new { success = true }));
-        }
+            var resp = new List<ImageKnowledge>();
+            foreach (var photo in Request.Form.Files)
+            {
+                using (var fs = System.IO.File.Create(photo.FileName))
+                {
+                    photo.CopyTo(fs);
 
-        [HttpGet("imageknowledge")]
-        public IActionResult GetProcessedPhotoData(byte[] imageData)
-        {
-            var photoResults = _photoClient.ProcessPhoto(imageData);
-            //TODO figure out what to return from this
+                    using (BinaryReader br = new BinaryReader(fs))
+                    {
+                        var imgData = br.ReadBytes((int)fs.Length);
+                        resp.Add(_photoClient.ProcessPhoto(imgData));
+                    }
+                }
+            }
 
-            return Ok();
+            return Ok(resp);
         }
     }
 }

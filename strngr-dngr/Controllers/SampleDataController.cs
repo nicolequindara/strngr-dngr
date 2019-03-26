@@ -1,8 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace strngr_dngr.Controllers
 {
@@ -14,12 +13,12 @@ namespace strngr_dngr.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("test")]
+        [HttpGet("[action]")]
         public IActionResult Test()
         {
-            return Ok(new { success = true });
+            return Ok(new {success = true});
         }
-        
+
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts(int startDateIndex)
         {
