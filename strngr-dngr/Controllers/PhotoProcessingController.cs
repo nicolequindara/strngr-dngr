@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using strngr_dngr.Services;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.CognitiveServices.Search.VisualSearch.Models;
+using strngr_dngr.Services;
+using System.Collections.Generic;
+using System.IO;
 
 namespace strngr_dngr.Controllers
 {

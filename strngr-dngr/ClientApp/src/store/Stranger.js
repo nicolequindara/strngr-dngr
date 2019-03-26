@@ -1,6 +1,4 @@
-//import { StrangerService } from "../services/StrangerService";
-
-import axios from "axios";
+import { StrangerService } from "../services/StrangerService";
 
 const addPhotoType = "ADD_PHOTO";
 const addStrangerInfoType = "ADD_STRANGER_INFO";
@@ -19,23 +17,12 @@ const initialState = {
 
 export const actionCreators = {
     addPhoto: (photos) => async (dispatch, getState) => {
-        // Call API
-        console.log(photos);
+        // Photo processing API
+        StrangerService.uploadPhotos(photos);
 
-        var formData = new FormData();
-        for(var i = 0; i < photos.length; ++i)
-        {
-            formData.append(`photo${i}`, photos[i]);
-        }
-
-        axios.post("api/PhotoProcessing/GetProcessedPhotoData", 
-            formData
-        ).then((resp) => {
-                console.log(resp);
-            }).catch((err) => {
-                console.log(err);
-            });
-
+        // Reverse image search API
+        var reverseImageSearchResults = StrangerService.reverseImageSearch(photos);
+        
         return ({
             type: addPhotoType,
             photos
