@@ -5,7 +5,8 @@
 }
 
 html {
-  font-size: 14px;
+    font-size: 14px;
+    background-color: #282c34;
 }
 @media (min-width: 768px) {
   html {

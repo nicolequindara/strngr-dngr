@@ -1,5 +1,4 @@
 .window {
-    
     background-color: #282c34;
 }
 .App {
@@ -19,7 +18,7 @@
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: white;
+    color: #696969;
 }
 
 .App-link {

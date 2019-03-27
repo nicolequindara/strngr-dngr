@@ -15,8 +15,8 @@ const PhotoUpload = props => {
             <div className="App-header">
                 <h1>Upload Photos</h1>
 
-                <div style={{ cursor: "pointer" }}>
-                    <label htmlFor="photoUploadButton">
+                <div>
+                    <label htmlFor="photoUploadButton" style={{cursor: "pointer"}}>
                         <img src={photoButton} className="App-logo" alt="logo" />
                     </label>
 
