@@ -2,6 +2,7 @@
 using strngr_dngr.Model.Request;
 using strngr_dngr.Services;
 using System.Threading.Tasks;
+using strngr_dngr.Model.Response.WhitePages;
 
 namespace strngr_dngr.Controllers
 {
@@ -19,7 +20,15 @@ namespace strngr_dngr.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> ReverseAddress([FromBody] ReverseAddressRequest request)
         {
+            if (request == null) return BadRequest();
             return Ok(await _whitePagesApiService.ReverseAddress(request));
+        }
+        
+        [HttpPost("[action]")]
+        public async Task<IActionResult> IdentityCheck([FromBody] IdentityCheckRequest request)
+        {
+            if (request == null) return BadRequest();
+            return Ok(await _whitePagesApiService.IdentityCheck(request));
         }
     }
 }

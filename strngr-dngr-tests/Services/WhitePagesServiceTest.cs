@@ -27,7 +27,7 @@ namespace strngr_dngr_tests.Services
             var parsed = JsonConvert.DeserializeObject<ReverseAddressResponse>(response);
         }
 
-        [Fact]
+        [Fact(Skip = "Don't use credits!")]
         public async Task ReverseAddress()
         {
             // Act
@@ -40,6 +40,26 @@ namespace strngr_dngr_tests.Services
             });
 
             Assert.NotNull(actual);
+        }
+
+
+        //[Fact(Skip = "Don't use credits!")]
+        [Fact]
+        public async Task IdentityCheck()
+        {
+            // Act
+            var actual = await _whitePagesApiService.IdentityCheck(new IdentityCheckRequest()
+            {
+                StreetLine1 = "4849 Empire Way",
+                City = "Irving",
+                StateCode = "TX",
+                PostalCode = "75038",
+                EmailAddress = "nicolequindara@match.com",
+                Phone = "7135056471"
+            });
+
+            Assert.NotNull(actual);
+            Assert.NotNull(actual.IdentityCheckScore);
         }
     }
 }
