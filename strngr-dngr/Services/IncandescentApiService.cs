@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using strngr_dngr.Model.Request;
 using strngr_dngr.Model.Response;
 using strngr_dngr.Model.Response.Incandescent;
@@ -20,7 +21,7 @@ namespace strngr_dngr.Services
         private readonly string AddRequestUrl = "https://incandescent.xyz/api/add/";
         private readonly string GetRequestUrl = "https://incandescent.xyz/api/get/";
         private readonly int MaxRetryCount = 5;
-        
+
         public object GetReverseImageResults(IEnumerable<string> urls)
         {
             var projectId = GetProjectId(urls);
@@ -46,26 +47,34 @@ namespace strngr_dngr.Services
             object results = null;
             bool retry = true;
             int retries = 0;
-            
+
             while (retry && retries < MaxRetryCount)
             {
-                var request = CreateGetRequest(projectId);
-                var response = request.GetResponse();
-                using (var reader = new StreamReader(response.GetResponseStream()))
+                try
                 {
-                    var getResponse = reader.ReadToEnd();
 
-                    // Check for error status
-                    var jsonStatusResponse = JsonConvert.DeserializeObject<IncandescentStatusResponse>(getResponse);
-                    retry = jsonStatusResponse.Status.Equals(710);
-                    
-                    results = JsonConvert.DeserializeObject(getResponse);
-
-                    if (retry)
+                    var request = CreateGetRequest(projectId);
+                    var response = request.GetResponse();
+                    using (var reader = new StreamReader(response.GetResponseStream()))
                     {
-                        retries++;
-                        Thread.Sleep(2000);
+                        var getResponse = reader.ReadToEnd();
+
+                        // Check for error status
+                        var jsonStatusResponse = JsonConvert.DeserializeObject<IncandescentStatusResponse>(getResponse);
+                        retry = jsonStatusResponse.Status.Equals(710);
+
+                        results = JsonConvert.DeserializeObject(getResponse);
+
+                        if (retry)
+                        {
+                            retries++;
+                            Thread.Sleep(2000);
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
                 }
             }
 
@@ -84,12 +93,12 @@ namespace strngr_dngr.Services
             return request;
         }
 
-        private WebRequest CreateAddRequest(IEnumerable<string> urls) 
+        private WebRequest CreateAddRequest(IEnumerable<string> urls)
         {
             var payload = JsonConvert.SerializeObject(new IncandescentAddImageRequest(urls));
             return CreatePostRequest(AddRequestUrl, payload);
         }
-        
+
         private WebRequest CreateGetRequest(string projectId)
         {
             var payload = JsonConvert.SerializeObject(new IncandescentGetRequest(projectId));

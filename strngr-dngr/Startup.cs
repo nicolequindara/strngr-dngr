@@ -31,6 +31,7 @@ namespace strngr_dngr
 
             services.AddScoped<IPhotoProcessingClient, PhotoProcessingClient>();
             services.AddScoped<IIncandescentApiService, IncandescentApiService>();
+            services.AddScoped<IWhitePagesApiService, WhitePagesApiService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace strngr_dngr.Model.Response.WhitePages
+namespace strngr_dngr.Model.Request
 {
     [Serializable]
     public class IdentityCheckRequest

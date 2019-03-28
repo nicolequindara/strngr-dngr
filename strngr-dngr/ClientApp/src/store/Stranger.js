@@ -4,18 +4,13 @@ const addPhotoType = "ADD_PHOTO";
 const processPhotoType = "PROCESS_PHOTO";
 const reverseImageSearchType = "REVERSE_IMAGE_SEARCH";
 const addStrangerInfoType = "ADD_STRANGER_INFO";
+const identityCheckType = "CHECK_IDENTITY";
 
 const initialState = {
     photos: null,
     processedPhotoResults: null,
-    info: {
-        firstName: undefined,
-        lastName: undefined,
-        age: undefined,
-        education: undefined,
-        job: undefined,
-        location: undefined
-    }
+    info: null,
+    identityCheckResults: null
 }
 
 export const actionCreators = {
@@ -26,23 +21,30 @@ export const actionCreators = {
         });
 
         // Photo processing API
-        var processedPhotoResults = StrangerService.processPhotos(photos);
+        var processedPhotoResults = await StrangerService.processPhotos(photos);
         dispatch({
             type: processPhotoType,
             processedPhotoResults
         });
         
         // Reverse image search API
-        var reverseImageSearchResults = StrangerService.reverseImageSearch(photos);
+        var reverseImageSearchResults = await StrangerService.reverseImageSearch(photos);
         dispatch({
             type: reverseImageSearchType,
             reverseImageSearchResults
         });
     },
-    addStranger: (info) => async (dispatch, getState) => {
+    addStrangerInfo: (info) => async (dispatch, getState) => {
         dispatch({
             type: addStrangerInfoType,
             info
+        });
+
+        // White pages API
+        var identityCheckResponse = await StrangerService.addStrangerInfo(info);        
+        dispatch({
+            type: identityCheckType,
+            identityCheckResponse
         });
     }
 };
@@ -64,6 +66,10 @@ export const reducer = (state, action) => {
 
     if (action.type === addStrangerInfoType) {
         return { ...state, info: action.info }
+    }
+
+    if (action.type === identityCheckType) {
+        return { ...state, identityCheckResponse: action.identityCheckResponse }
     }
 
     return state;

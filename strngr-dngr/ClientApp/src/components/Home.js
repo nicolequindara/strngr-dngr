@@ -12,7 +12,7 @@ const Home = props => {
     >
       <div className="App-header">
         <h1>Stranger Danger</h1>
-          <Link to="/disclaimer">
+          <Link to="/photos">
             <img src={logo} className="App-logo" alt="logo" />
           </Link>
       </div>

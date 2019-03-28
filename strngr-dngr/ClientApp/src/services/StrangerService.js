@@ -1,22 +1,22 @@
 import axios from "axios";
 
 export const StrangerService = {
-    processPhotos: (photos) => {
+    processPhotos: async (photos) => {
         var formData = new FormData();
         for (var i = 0; i < photos.length; ++i) {
             formData.append(`photo${i}`, photos[i]);
         }
 
-        return axios.post("api/PhotoProcessing/GetProcessedPhotoData",
+        return await axios.post("api/PhotoProcessing/GetProcessedPhotoData",
             formData
         ).then((resp) => {
             console.log("StrangerService.processPhotos", resp);
-            return resp;
+            return resp.data;
         }).catch((err) => {
             console.log(err);
         });
     },
-    reverseImageSearch: (photos) => {
+    reverseImageSearch: async (photos)  => {
         var imageUrls = [];
 
         for (var i = 0; i < photos.length; ++i) {
@@ -24,9 +24,8 @@ export const StrangerService = {
             imageUrls.push(imgUrl);
         }
         
-        return axios.post("api/ReverseImageSearch/Search", imageUrls).then((resp) => {
-            console.log("StrangerService.reverseImageSearch", resp);
-
+        return await axios.post("api/ReverseImageSearch/Search", imageUrls).then((resp) => {
+            console.log("StrangerService.reverseImageSearch", resp.data);
             imageUrls.map(url => { window.URL.revokeObjectURL(url) });
             return resp.data;
         }).catch((err) => {
@@ -35,6 +34,13 @@ export const StrangerService = {
             imageUrls.map(url => { window.URL.revokeObjectURL(url) });
             return err;
         });
-
+    },
+    addStrangerInfo: async (info) => {
+        return await axios.post("api/WhitePages/IdentityCheck", info).then((resp) => {
+            console.log("StrangerService.addStrangerInfo", resp.data);
+            return resp.data;
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 }
