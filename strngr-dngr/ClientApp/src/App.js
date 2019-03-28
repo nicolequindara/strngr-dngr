@@ -1,5 +1,6 @@
 import Disclaimer from './components/Disclaimer';
 import Home from './components/Home';
+import Info from './components/Info';
 import Layout from './components/Layout';
 import PhotoUpload from './components/PhotoUpload';
 import React from 'react';
@@ -10,5 +11,6 @@ export default () => (
     <Route exact path='/' component={Home} />
     <Route exact path='/disclaimer' component={Disclaimer} />
     <Route exact path='/photos' component={PhotoUpload} />
+    <Route exact path='/info' component={Info} />
   </Layout>
 );

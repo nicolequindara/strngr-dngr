@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const StrangerService = {
-    uploadPhotos: (photos) => {
+    processPhotos: (photos) => {
         var formData = new FormData();
         for (var i = 0; i < photos.length; ++i) {
             formData.append(`photo${i}`, photos[i]);
