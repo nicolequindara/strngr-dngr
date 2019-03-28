@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 import { actionCreators } from '../store/Stranger';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -58,6 +59,10 @@ class Info extends React.PureComponent {
     }
 
     render() {
+        if (this.props.info) {
+            return <Redirect to="/loading" />
+        }
+
         return (
             <div className="App">
                 <div className="App-header">

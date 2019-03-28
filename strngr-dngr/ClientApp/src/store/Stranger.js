@@ -9,6 +9,7 @@ const identityCheckType = "CHECK_IDENTITY";
 const initialState = {
     photos: null,
     processedPhotoResults: null,
+    reverseImageSearchResults: null,
     info: null,
     identityCheckResults: null
 }
@@ -41,10 +42,10 @@ export const actionCreators = {
         });
 
         // White pages API
-        var identityCheckResponse = await StrangerService.addStrangerInfo(info);        
+        var identityCheckResults = await StrangerService.addStrangerInfo(info);        
         dispatch({
             type: identityCheckType,
-            identityCheckResponse
+            identityCheckResults
         });
     }
 };
@@ -69,7 +70,7 @@ export const reducer = (state, action) => {
     }
 
     if (action.type === identityCheckType) {
-        return { ...state, identityCheckResponse: action.identityCheckResponse }
+        return { ...state, identityCheckResults: action.identityCheckResults }
     }
 
     return state;
