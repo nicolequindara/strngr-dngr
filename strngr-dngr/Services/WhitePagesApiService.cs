@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
 using Newtonsoft.Json;
 using strngr_dngr.Model.Request;
-using strngr_dngr.Model.Response;
+using strngr_dngr.Model.Response.WhitePages;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;

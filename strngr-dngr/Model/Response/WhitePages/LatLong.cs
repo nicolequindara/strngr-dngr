@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace strngr_dngr.Model.Response
+namespace strngr_dngr.Model.Response.WhitePages
 {
     [Serializable]
     public class LatLong

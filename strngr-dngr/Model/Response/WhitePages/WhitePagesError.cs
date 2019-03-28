@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace strngr_dngr.Model.Response
+namespace strngr_dngr.Model.Response.WhitePages
 {
     public class WhitePagesError
     {

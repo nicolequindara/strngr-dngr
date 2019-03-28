@@ -1,4 +1,4 @@
-﻿namespace strngr_dngr.Model.Response
+﻿namespace strngr_dngr.Model.Response.WhitePages
 {
     public enum InputCompleteness
     {

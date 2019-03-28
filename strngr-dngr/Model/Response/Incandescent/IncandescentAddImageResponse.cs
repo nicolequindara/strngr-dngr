@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace strngr_dngr.Model.Response
+namespace strngr_dngr.Model.Response.Incandescent
 {
 
     [Serializable]

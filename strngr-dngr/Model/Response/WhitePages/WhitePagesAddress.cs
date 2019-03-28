@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace strngr_dngr.Model.Response
+namespace strngr_dngr.Model.Response.WhitePages
 {
     [Serializable]
-    public class ReverseAddressResponse
+    public class WhitePagesAddress
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
@@ -37,18 +37,6 @@ namespace strngr_dngr.Model.Response
         public LatLong LatLong { get; set; }
 
         [JsonProperty(PropertyName = "is_active")]
-        public bool IsActive { get; set; }
-
-        [JsonProperty(PropertyName = "input_completeness")]
-        public InputCompleteness InputCompleteness { get; set; }
-
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
-
-        [JsonProperty(PropertyName = "error")]
-        public WhitePagesError Error { get; set; }
-
-        [JsonProperty(PropertyName = "warnings")]
-        public string[] Warnings { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

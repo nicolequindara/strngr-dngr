@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using strngr_dngr.Model.Request;
 using strngr_dngr.Model.Response;
+using strngr_dngr.Model.Response.Incandescent;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
