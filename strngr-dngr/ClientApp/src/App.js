@@ -7,6 +7,7 @@ import PhotoUpload from './components/PhotoUpload';
 import React from 'react';
 import { Route } from 'react-router';
 import Summary from './components/Summary';
+import  Test  from './components/Test';
 
 export default () => (
     <Layout>
@@ -16,5 +17,6 @@ export default () => (
         <Route exact path='/info' component={Info} />
         <Route exact path='/loading' component={Loading} />
         <Route exact path='/summary' component={Summary} />
+        <Route exact path='/test' component={Test} />
     </Layout>
 );
