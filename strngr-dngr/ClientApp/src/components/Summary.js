@@ -132,7 +132,7 @@ const IdentityCheckSummary = (props) => {
                     </div>
                 </div>
 
-                <h3>Overall Stranger Danger Score: {(100 - (identity_check_score / 500 * 100)).toFixed(2)}%</h3>
+                <h3>Overall Stranger Danger Score: {((identity_check_score / 5.0)).toFixed(2)}%</h3>
             </div>
         </div>         
         );
