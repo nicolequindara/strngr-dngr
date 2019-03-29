@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
-import { withRouter } from "react-router";
 import { actionCreators } from '../store/Stranger';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router";
 
 class Info extends React.PureComponent {
 
@@ -55,7 +55,7 @@ class Info extends React.PureComponent {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.addStrangerInfo(this.state);
+        this.props.performIdentityCheck(this.state);
     }
 
     skipStep = () => {
@@ -85,7 +85,9 @@ class Info extends React.PureComponent {
                     </div>
                     </form>
 
-                    <input type="button" value="Skip This Step" onClick={this.skipStep} className="skip-button btn btn-link" />
+                    
+                    {this.props.photo && 
+                    <input type="button" value="Skip This Step" onClick={this.skipStep} className="skip-button btn btn-link" /> }
                 </div>
 
             </div>

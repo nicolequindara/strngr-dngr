@@ -1,10 +1,10 @@
 import "../styles/App.css"
 
 import React from 'react';
+import _ from "lodash";
 import { actionCreators } from '../store/Stranger';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import _ from "lodash";
 
 class Summary extends React.PureComponent {
   constructor(props) {
@@ -12,7 +12,7 @@ class Summary extends React.PureComponent {
   }    
   
     render() {              
-      const {info, reverseImageSearchResults, processedPhotoResults, identityCheckResults, photos} = this.props;
+      const {info, reverseImageSearchResults, processedPhotoResults, identityCheckResults, offenderLookupResults, photos} = this.props;
 
       console.log("Summary.props", this.props);
       
@@ -20,8 +20,12 @@ class Summary extends React.PureComponent {
         <div className="App">
           <div className="App-header">
             <h1>Summary</h1>
-                  {photos ? <PhotoSummary processedPhotoResults={processedPhotoResults} /> : <React.Fragment />}
-                  {info ? <IdentityCheckSummary info={info} identityCheckResults={identityCheckResults} /> : <React.Fragment />}
+                  {photos ? <PhotoSummary processedPhotoResults={processedPhotoResults} photos={photos} /> : <React.Fragment />}
+                  {info ? <React.Fragment>
+                      <IdentityCheckSummary info={info} identityCheckResults={identityCheckResults} /> 
+                      <CriminalCheckSummary info={info} offenderLookupResults={offenderLookupResults} />
+                    </React.Fragment>
+                    : <React.Fragment />}
           </div>
         </div>
       );
@@ -29,8 +33,10 @@ class Summary extends React.PureComponent {
 }
 
 const PhotoSummary = (props) => {
-  const { processedPhotoResults } = props;
+  const { processedPhotoResults, photos } = props;
 
+  const getImgThumbnail = (result) => result.tags[0].actions[0].data && result.tags[0].actions[0].data.value && result.tags[0].actions[0].data.value.length > 0 && result.tags[0].actions[0].data.value[0].thumbnailUrl;
+  
   const getReferencedPages = (result) => 
   {
     var pagesIncluding = _.find(result.tags[0].actions, {actionType: "PagesIncluding"})
@@ -41,21 +47,42 @@ const PhotoSummary = (props) => {
     return (
         <div className="box">
           <div className="header">Photo Image Knowledge</div>
-          {processedPhotoResults.map(results => {            
-            return (
-            <div key={results.image.imageInsightsToken} className="body">                
-                <img src={results.tags[0].actions[0].data.value[0].thumbnailUrl} style={{maxWidth:"50%"}} />
+          {
+            processedPhotoResults.map((results, index) => {           
 
-                This image was found in the following places:                
-                {
-                  getReferencedPages(results).map(x => {
-                  return <a key={x.imageInsightsToken} style={{display: "block"}} href={x.hostPageUrl}>{x.hostPageUrl}</a>
-                })}
-            </div>);
-          })}
+            if(getImgThumbnail(results))
+            {
+              return (                
+              <div key={results.image.imageInsightsToken} className="body">                
+                  <img src={getImgThumbnail(results)} style={{maxWidth:"50%"}} />
+
+                  This image was found in the following places:                
+                  {
+                    getReferencedPages(results).map(x => {
+                    return <a key={x.imageInsightsToken} style={{display: "block"}} href={x.hostPageUrl}>{x.hostPageUrl}</a>
+                  })}
+              </div>);
+            }
+            else return <div><b>Did not</b> find any other instances of the uploaded image on the internet!</div>;
+
+            })
+          }
             
     </div>
     );
+}
+
+const CriminalCheckSummary = (props) => {
+  const {info, offenderLookupResults } = props;
+  
+  return (
+    <div className="box">
+      <div className="header">Offender Lookup</div>
+      <div className="body">
+          {offenderLookupResults.firstname}{offenderLookupResults.lastname ? ` ${offenderLookupResults.lastname}` : ""}, born {offenderLookupResults.birth_year} committed the following crime: {offenderLookupResults.crime_description}.  This crime occurred in {offenderLookupResults.city}, {offenderLookupResults.state}.
+      </div>
+    </div>
+  )
 }
 
 const IdentityCheckSummary = (props) => {

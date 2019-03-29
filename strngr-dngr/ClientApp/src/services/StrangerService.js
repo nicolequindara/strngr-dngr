@@ -35,12 +35,20 @@ export const StrangerService = {
             return err;
         });
     },
-    addStrangerInfo: async (info) => {
+    performIdentityCheck: async (info) => {
         return await axios.post("api/WhitePages/IdentityCheck", info).then((resp) => {
-            console.log("StrangerService.addStrangerInfo", resp.data);
+            console.log("StrangerService.performIdentityCheck", resp.data);
             return resp.data;
         }).catch((err) => {
             console.log(err);
         });
+    },
+    performOffenderLookup: async (info) => {
+        return await axios.post("api/OffenderLookup/Search", info).then((resp) => {
+            console.log("StrangerService.performOffenderlookup", resp.data);
+            return resp.data;
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 }

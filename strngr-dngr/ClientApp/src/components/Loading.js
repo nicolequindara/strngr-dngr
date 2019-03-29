@@ -13,7 +13,7 @@ class Loading extends React.PureComponent {
     }
 
     photosDone = () => !this.props.photos || (this.props.photos && this.props.processedPhotoResults);
-    infoDone = () => !this.props.info || (this.props.info && this.props.identityCheckResults);
+    infoDone = () => !this.props.info || (this.props.info && this.props.identityCheckResults && this.props.offenderLookupResults);
 
     render() {
         if(this.photosDone() && this.infoDone())
