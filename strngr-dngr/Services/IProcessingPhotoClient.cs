@@ -1,9 +1,10 @@
 ﻿using Microsoft.Azure.CognitiveServices.Search.VisualSearch.Models;
+using System.Threading.Tasks;
 
 namespace strngr_dngr.Services
 {
-	public interface IPhotoProcessingClient
+    public interface IPhotoProcessingClient
 	{
-		ImageKnowledge ProcessPhoto(byte[] photoData);
+		Task<ImageKnowledge> ProcessPhoto(byte[] photoData);
 	}
 }

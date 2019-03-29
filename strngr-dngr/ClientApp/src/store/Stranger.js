@@ -1,5 +1,6 @@
 import { StrangerService } from "../services/StrangerService";
 
+const initType = "STRANGER_INIT";
 const addPhotoType = "ADD_PHOTO";
 const processPhotoType = "PROCESS_PHOTO";
 const reverseImageSearchType = "REVERSE_IMAGE_SEARCH";
@@ -15,6 +16,9 @@ const initialState = {
 }
 
 export const actionCreators = {
+    init: () => (dispatch) => {
+        dispatch({ type: initType });
+    },
     addPhoto: (photos) => async (dispatch, getState) => {
         dispatch({
             type: addPhotoType,
@@ -52,6 +56,9 @@ export const actionCreators = {
 
 export const reducer = (state, action) => {
     state = state || initialState;
+    if (action.type == initType) {
+        return initialState;
+    }
 
     if (action.type == addPhotoType) {
         return { ...state, photos: action.photos }

@@ -10,6 +10,10 @@ class PhotoUpload extends React.PureComponent {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.init();
+    }
+
     handleChange = (files) => {
         this.props.addPhoto(files);
     }
