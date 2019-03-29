@@ -53,7 +53,7 @@ namespace strngr_dngr.Services
 
             var crime = CrimeDescriptions.Take(1).FirstOrDefault();
 
-            return _fixture.Build<OffenderLookupResponse>()
+            var response = _fixture.Build<OffenderLookupResponse>()
                 .With(x => x.City, request.City)
                 .With(x => x.FirstName, firstName)
                 .With(x => x.LastName, lastName)
@@ -62,6 +62,8 @@ namespace strngr_dngr.Services
                 .With(x => x.Type, CrimeType.Warrant)
                 .With(x => x.Description, crime)
                 .Create();
+
+            return response;
         }
     }
 }

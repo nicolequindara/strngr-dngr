@@ -86,8 +86,8 @@ class Info extends React.PureComponent {
                     </form>
 
                     
-                    {this.props.photo && 
-                    <input type="button" value="Skip This Step" onClick={this.skipStep} className="skip-button btn btn-link" /> }
+                    {/* {this.props.photo && 
+                    <input type="button" value="Skip This Step" onClick={this.skipStep} className="skip-button btn btn-link" /> } */}
                 </div>
 
             </div>

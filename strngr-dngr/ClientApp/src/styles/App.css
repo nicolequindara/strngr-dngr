@@ -68,9 +68,9 @@
 }
 
 .box {
-    -moz-box-shadow: 3px 3px 5px 6px #ccc;
-    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-    box-shadow: 3px 3px 5px 6px #ccc;
+    -moz-box-shadow: 1px 1px 10px 1px#ccc;
+    -webkit-box-shadow: 1px 1px 10px 1px#ccc;
+    box-shadow: 1px 1px 10px 1px#ccc;
     margin: 30px;
     padding: 10px;
     border-radius: 10px;
@@ -88,9 +88,9 @@
     margin:30px;
     padding: 10px;
     border-radius: 10px;
-    -moz-box-shadow: 3px 3px 5px 6px #ccc;
-    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-    box-shadow: 3px 3px 5px 6px #ccc;
+    -moz-box-shadow: 1px 1px 10px 1px#ccc;
+    -webkit-box-shadow: 1px 1px 10px 1px#ccc;
+    box-shadow: 1px 1px 10px 1px#ccc;
     }
 
 .header {
@@ -109,10 +109,50 @@
 
 .body a {
     font-size: small;
-    margin:5px;
+    margin:1px;
 }
 
 .skip-button {
     font-size:xx-small;
     text-decoration: none;
+}
+
+.flex-column {    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.flex-row {    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.faq-section {
+    margin: 15px auto;
+    padding: 10px;
+    font-size: small;
+    border: solid 1px lightgray;
+    border-radius: 8px;
+    width: 100%;
+    -moz-box-shadow: 1px 1px 10px 1px#ccc;
+    -webkit-box-shadow: 1px 1px 10px 1px#ccc;
+    box-shadow: 1px 1px 10px 1px#ccc;
+}
+
+.avatar {
+    max-height: 250px;
+    margin:10px;
+}
+
+.profile {
+    padding:10px;
+}
+
+.profile img {
+    border-radius: 50%
 }
