@@ -100,10 +100,6 @@
 
 .box .body {
     font-size: medium;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
 }
 
 .body img {
