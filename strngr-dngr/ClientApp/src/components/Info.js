@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router";
 import { actionCreators } from '../store/Stranger';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -54,8 +55,11 @@ class Info extends React.PureComponent {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log("Info.state", this.state);
         this.props.addStrangerInfo(this.state);
+    }
+
+    skipStep = () => {
+        this.props.history.push("/loading");
     }
 
     render() {
@@ -80,6 +84,8 @@ class Info extends React.PureComponent {
                             <input type="submit" className="btn btn-primary" value="Submit" />
                     </div>
                     </form>
+
+                    <input type="button" value="Skip This Step" onClick={this.skipStep} className="skip-button btn btn-link" />
                 </div>
 
             </div>
@@ -87,7 +93,7 @@ class Info extends React.PureComponent {
     }
 }
 
-export default connect(
+export default withRouter(connect(
     state => state.stranger,
     dispatch => bindActionCreators(actionCreators, dispatch)
-)(Info);
+)(Info));

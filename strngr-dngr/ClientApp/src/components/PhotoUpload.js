@@ -1,5 +1,6 @@
 import React from 'react';
-import { Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router";
 import { actionCreators } from '../store/Stranger';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -16,6 +17,10 @@ class PhotoUpload extends React.PureComponent {
 
     handleChange = (files) => {
         this.props.addPhoto(files);
+    }
+
+    skipStep = () => {
+        this.props.history.push("/info");
     }
 
     render() {
@@ -42,13 +47,14 @@ class PhotoUpload extends React.PureComponent {
                             className="btn btn-primary"
                             onChange={(e) => this.handleChange(e.target.files)} />
                     </div>
+                    <input type="button" value="Skip This Step" onClick={this.skipStep} className="skip-button btn btn-link"/>
                 </div>
             </div>
         );
     }
 
 }
-export default connect(
+export default withRouter(connect(
     state => state.stranger,
     dispatch => bindActionCreators(actionCreators, dispatch)
-)(PhotoUpload);
+)(PhotoUpload));
