@@ -74,7 +74,12 @@
     margin: 30px;
     padding: 10px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
+
 .section {
     display: flex;
     flex-direction: column;
@@ -88,11 +93,26 @@
     box-shadow: 3px 3px 5px 6px #ccc;
     }
 
-.section .header {
+.header {
     font-weight: bold;
     font-size: large;
 }
 
-.section .body {
+.box .body {
     font-size: medium;
+}
+
+.body img {
+    display: block;
+    margin: 0px auto;
+}
+
+.body a {
+    font-size: small;
+    margin:5px;
+}
+
+.skip-button {
+    font-size:xx-small;
+    text-decoration: none;
 }
