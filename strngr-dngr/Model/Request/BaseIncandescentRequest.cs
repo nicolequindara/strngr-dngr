@@ -8,8 +8,8 @@ namespace strngr_dngr.Model.Request
     [Serializable]
     public class BaseIncandescentRequest
     {
-        private static readonly int IncandescentApiUid = 7572;
-        private static readonly string IncandescentApiKey = "6c9ba07fa3b42cc78fc271b12518fcfe";
+        private static readonly int IncandescentApiUid = 7596;
+        private static readonly string IncandescentApiKey = "56e94346f17109525a4ddea135149eb2";
 
         public BaseIncandescentRequest()
         {

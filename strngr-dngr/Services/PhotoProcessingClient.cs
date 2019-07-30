@@ -11,7 +11,7 @@ namespace strngr_dngr.Services
 
         public PhotoProcessingClient()
         {
-            _client = new VisualSearchClient(new ApiKeyServiceClientCredentials("6126fc4406c541a4bc4347f571c49215"));
+            _client = new VisualSearchClient(new ApiKeyServiceClientCredentials("9c3526c0eb0f46ee9c8e304d9e576f55"));
         }
 
         public async Task<ImageKnowledge> ProcessPhoto(byte[] photoData)
